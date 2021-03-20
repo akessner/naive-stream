@@ -23,10 +23,11 @@ export class Pipeline {
         }
        
     }
-    static foldMedian(fn: (i: any) => void): any {
+    static foldMedian(fn: (i: any) => void, arr: number[]=[]): any {
         return (i)=>{
-            fn(i);
-        }
+            const sum = 0
+            fn(sum);
+         }
     }  
 
     static stdoutSink(fn: (i)=>void = (i)=>{}) {

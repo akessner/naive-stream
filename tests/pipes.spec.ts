@@ -82,6 +82,11 @@ describe("Pipeline input", ()=> {
         P.foldSum(P.stdoutSink(), [1, 2, 3])()
         expect(fakeLog).to.equal("6\n")
     })
+
+    it('fold median returns 0 if array is empty',()=>{
+        P.foldMedian(P.stdoutSink(), [])()
+        expect(fakeLog).to.equal("0\n")
+    })
   
     it.skip('passes the final acceptance test of a sample pipeline', ()=>{
         ["1", "2", "-5", "3", "4", "5", "6", "10", "11", "12", "13", "14", "15"].map(
