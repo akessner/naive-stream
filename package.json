@@ -1,0 +1,25 @@
+{
+  "name": "naive-stream",
+  "version": "0.0.1",
+  "description": "A six piece pipe builder",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc mocha  -r ts-node/register tests/**/*.spec.ts"
+  },
+  "author": "Avi Kessner",
+  "license": "ISC",
+  "dependencies": {
+    "@types/chai": "^4.2.15",
+    "@types/mocha": "^8.2.1",
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0",
+    "prettier": "^2.2.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  },
+  "devDependencies": {
+    "@types/streamtest": "^1.2.0",
+    "streamtest": "^2.0.0"
+  }
+}
