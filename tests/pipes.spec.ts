@@ -51,36 +51,50 @@ describe("Pipeline input", ()=> {
     })
 
     it('foldSum returns 0 if array is empty',()=>{
-        P.foldSum(P.stdoutSink(), [])()
+        P.foldSum([], P.stdoutSink() )()
         expect(fakeLog).to.equal("0\n")
     })
 
     it('foldSum returns sum of array',()=>{
-        P.foldSum(P.stdoutSink(), [1, 2, 3])()
+        P.foldSum([1, 2, 3], P.stdoutSink() )()
         expect(fakeLog).to.equal("6\n")
     })
 
     it('fold median returns 0 if array is empty',()=>{
-        P.foldMedian(P.stdoutSink(), [])()
+        P.foldMedian([],P.stdoutSink() )()
         expect(fakeLog).to.equal("0\n")
     })
     it('fold median returns middle number if array is length is odd',()=>{
-        P.foldMedian(P.stdoutSink(), [1,2,3,4,5,6,7])()
+        P.foldMedian( [1,2,3,4,5,6,7],P.stdoutSink())()
         expect(fakeLog).to.equal("4\n")
     })
     it('fold median returns average of two middle numbers if array is length is even',()=>{
-        P.foldMedian(P.stdoutSink(), [1,2,3,4,5,6,7,8])()
+        P.foldMedian([1,2,3,4,5,6,7,8], P.stdoutSink())()
         expect(fakeLog).to.equal("4.5\n")
     })
   
+
+    it('fixed Event window returns nothing if size not met', ()=>{
+        ["1", "2"].map(P.stdinSource(P.fixedEventWindow(3,P.stdoutSink())))
+        expect(fakeLog).to.equal("> 1\n> 2\n")
+    })
+    it('fixed Event window returns array if size is met', ()=>{
+        ["1", "2", "3"].map(P.stdinSource(P.fixedEventWindow(3,P.stdoutSink())))
+        expect(fakeLog).to.equal("> 1\n> 2\n> 3\n1,2,3\n")
+    })
+    it('fixed Event window  + sum fold returns sum if size is met', ()=>{
+        ["1", "2", "3"].map(P.stdinSource(P.fixedEventWindow(3,P.foldSum([],P.stdoutSink()))))
+        expect(fakeLog).to.equal("> 1\n> 2\n> 3\n6\n")
+    })
+
     it.skip('passes the final acceptance test of a sample pipeline', ()=>{
         ["1", "2", "-5", "3", "4", "5", "6", "10", "11", "12", "13", "14", "15"].map(
             P.stdinSource(
                 P.filter((i)=>{return i>0}, 
                     P.fixedEventWindow(2, 
-                        P.foldSum(
+                        P.foldSum([],
                             P.fixedEventWindow(3, 
-                                P.foldMedian(
+                                P.foldMedian([],
                                     P.stdoutSink()
                                 )
                             )
