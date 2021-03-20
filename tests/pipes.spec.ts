@@ -63,6 +63,25 @@ describe("Pipeline input", ()=> {
         ["1", "2", "3"].map(P.stdinSource(P.stdoutSink(P.stdoutSink())))
         expect(fakeLog).to.equal("> 1\n1\n1\n> 2\n2\n2\n> 3\n3\n3\n")
     })
+
+    it('if filter fails, only print input',()=> {
+        ["1", "2", "3"].map(P.stdinSource(P.filter((i)=>{return i<0},P.stdoutSink())))
+        expect(fakeLog).to.equal("> 1\n> 2\n> 3\n")
+    })
+    it('if filter passes, print input and number',()=> {
+        ["1", "2", "3"].map(P.stdinSource(P.filter((i)=>{return i>0},P.stdoutSink())))
+        expect(fakeLog).to.equal("> 1\n1\n> 2\n2\n> 3\n3\n")
+    })
+
+    it('foldSum returns 0 if array is empty',()=>{
+        P.foldSum(P.stdoutSink(), [])()
+        expect(fakeLog).to.equal("0\n")
+    })
+
+    it('foldSum returns sum of array',()=>{
+        P.foldSum(P.stdoutSink(), [1, 2, 3])()
+        expect(fakeLog).to.equal("6\n")
+    })
   
     it.skip('passes the final acceptance test of a sample pipeline', ()=>{
         ["1", "2", "-5", "3", "4", "5", "6", "10", "11", "12", "13", "14", "15"].map(

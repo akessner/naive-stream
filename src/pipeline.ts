@@ -9,9 +9,10 @@ export class Pipeline {
         }
        
     }
-    static foldSum(fn: any): any {
-        return (i)=>{
-            fn(i);
+    static foldSum(fn: any, arr: number[] = []): any {     
+         return (i)=>{     
+            const sum = arr.reduce((prev, i,)=>prev+i,0)
+            fn(sum);
         }
         
     }
