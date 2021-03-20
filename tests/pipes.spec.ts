@@ -4,32 +4,9 @@ import { Pipeline } from "../src/pipeline"
 // API
 /*  
 stdin-source: reads one number from stdin, prints ‘> ‘ and the number afterward, for example: if the user entered 1, it will print ‘> 1’. 
-filter: only passes events that match a predicate (a function that returns true or false given a number). The predicate is given during the initialization time of the filter.
 fixed-event-window: aggregates events into a fixed-size array, pass it forward when full. The size of the fixed array is defined during the initialization of fixed-event-window.
-fold-sum: sums the value of the events in the array, and passes forward the sum.
-fold-median: calculate the median (חציון) value of the events in the array, and pass forward the median.
-stdout-sink: prints the number to stdout and pass forward the number.
-
-From these 6 building blocks, any pipeline can be built, here is one for example:
+from these 6 building blocks, any pipeline can be built, here is one for example:
 stdin-source → filter(i=>i>0) → fixed-event-window(2) → fold-sum →  fixed-event-window(3) →  fold-median → stdout-sink
-
-An example of input by the user:
-> 1
-> 2
-> -5
-> 3
-> 4
-> 5
-> 6
-7 ← printed by stdout-sink
-> 10
-> 11
-> 12
-> 13
-> 14
-> 15
-??? ← what would be the value here?
-
 
 */
 const P = Pipeline
@@ -86,6 +63,14 @@ describe("Pipeline input", ()=> {
     it('fold median returns 0 if array is empty',()=>{
         P.foldMedian(P.stdoutSink(), [])()
         expect(fakeLog).to.equal("0\n")
+    })
+    it('fold median returns middle number if array is length is odd',()=>{
+        P.foldMedian(P.stdoutSink(), [1,2,3,4,5,6,7])()
+        expect(fakeLog).to.equal("4\n")
+    })
+    it('fold median returns average of two middle numbers if array is length is even',()=>{
+        P.foldMedian(P.stdoutSink(), [1,2,3,4,5,6,7,8])()
+        expect(fakeLog).to.equal("4.5\n")
     })
   
     it.skip('passes the final acceptance test of a sample pipeline', ()=>{

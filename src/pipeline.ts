@@ -25,8 +25,17 @@ export class Pipeline {
     }
     static foldMedian(fn: (i: any) => void, arr: number[]=[]): any {
         return (i)=>{
-            const sum = 0
-            fn(sum);
+            const len = arr.length;
+            let median = 0
+            if (len%2===0) {
+               const midSum = arr[len/2] + arr[len/2-1] || 0
+               median = midSum/2
+                
+            } else {
+                median =arr[(len-1)/2]
+            }
+           
+            fn(median);
          }
     }  
 
