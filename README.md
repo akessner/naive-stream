@@ -12,4 +12,6 @@ To run the program using the stdinput and the default pipeline run `npm run star
 To run the tests run `npm run test`  
 You can replace the index.ts file with any constructed pipeline of your choosing.
 
+For a complete understanding of how to run the code, please view the tests.
 For a cleaner look, the tests alias `Pipeline` to `P`
+
