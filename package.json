@@ -4,7 +4,9 @@
   "description": "A six piece pipe builder",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha  -r ts-node/register tests/**/*.spec.ts"
+    "test": "cross-env NODE_ENV=test nyc mocha  -r ts-node/register tests/**/*.spec.ts",
+    "start": "ts-node ./src/index.ts"
+  
   },
   "author": "Avi Kessner",
   "license": "ISC",
@@ -14,12 +16,13 @@
     "chai": "^4.3.4",
     "mocha": "^8.3.2",
     "nyc": "^15.1.0",
-    "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
   },
   "devDependencies": {
     "@types/streamtest": "^1.2.0",
+    "cross-env": "^7.0.3",
+    "prettier": "^2.2.1",
     "streamtest": "^2.0.0"
   }
 }
