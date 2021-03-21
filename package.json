@@ -6,7 +6,6 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test nyc mocha  -r ts-node/register tests/**/*.spec.ts",
     "start": "ts-node ./src/index.ts"
-  
   },
   "author": "Avi Kessner",
   "license": "ISC",

@@ -12,11 +12,11 @@ export class Pipeline {
     if (len % 2 === 0) {
       return sumTwoMiddleValues(arr, len) / 2;
     } else {
-      const middleIndex = (len - 1) / 2
+      const middleIndex = (len - 1) / 2;
       return arr[middleIndex];
     }
     function sumTwoMiddleValues(arr: number[], len: number) {
-        return arr[len / 2] + arr[len / 2 - 1] || 0;
+      return arr[len / 2] + arr[len / 2 - 1] || 0;
     }
   }
   static foldSum(arr: number[]): number {
@@ -65,4 +65,3 @@ export class Pipeline {
     };
   }
 }
-
