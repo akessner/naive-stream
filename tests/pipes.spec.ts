@@ -1,14 +1,5 @@
 import { expect } from "chai";
 import { Pipeline } from "../src/pipeline";
-
-// API
-/*  
-stdin-source: reads one number from stdin, prints ‘> ‘ and the number afterward, for example: if the user entered 1, it will print ‘> 1’. 
-fixed-event-window: aggregates events into a fixed-size array, pass it forward when full. The size of the fixed array is defined during the initialization of fixed-event-window.
-from these 6 building blocks, any pipeline can be built, here is one for example:
-stdin-source → filter(i=>i>0) → fixed-event-window(2) → fold-sum →  fixed-event-window(3) →  fold-median → stdout-sink
-
-*/
 const P = Pipeline;
 const OldLog = console.log;
 let fakeLog: string = "";
